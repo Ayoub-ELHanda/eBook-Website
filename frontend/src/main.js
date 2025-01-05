@@ -1,6 +1,11 @@
+// Minimal Vue.js eBook Store Template
+// Purpose: Sell PDF books with secure access after purchase
+
+// main.js (Vue Entry Point)
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router/index.js';  // Import router
+import router from './router';
+import './assets/style.css';
 
 const app = createApp(App);
 app.use(router);

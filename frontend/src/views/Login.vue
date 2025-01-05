@@ -1,15 +1,14 @@
 <template>
     <h1>Login</h1>
     <form @submit.prevent="loginUser">
-        <input v-model="email" placeholder="Enter Email" required />
-        <input v-model="password" type="password" placeholder="Enter Password" required />
+        <input v-model="email" placeholder="Email" required />
+        <input v-model="password" type="password" placeholder="Password" required />
         <button type="submit">Login</button>
     </form>
 </template>
 
 <script>
 import axios from 'axios';
-
 export default {
     data() {
         return {
@@ -19,15 +18,13 @@ export default {
     },
     methods: {
         async loginUser() {
-            try {
-                const response = await axios.post('http://localhost:5000/api/users/login', {
-                    email: this.email,
-                    password: this.password
-                });
-                alert('Login Successful');
-            } catch (error) {
-                alert('Invalid Credentials');
-            }
+            const response = await axios.post('http://localhost:5000/api/users/login', {
+                email: this.email,
+                password: this.password
+            });
+            localStorage.setItem('token', response.data.token);
+            alert('Login successful!');
+            this.$router.push('/library');
         }
     }
 }
