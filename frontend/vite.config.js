@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-})
+    plugins: [vue()],
+    server: {
+        port: 5173,  // You can change the port if needed
+        open: true    // Automatically opens the browser
+    },
+    base: '/',  // Ensure the base path is set for proper routing
+});

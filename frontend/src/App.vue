@@ -7,11 +7,15 @@ import { RouterView, RouterLink } from 'vue-router'
     <nav>
       <RouterLink to="/">Home</RouterLink> | 
       <RouterLink to="/register">Register</RouterLink> | 
-      <RouterLink to="/login">Login</RouterLink>
+      <RouterLink to="/login">Login</RouterLink> | 
+      <RouterLink to="/cart">Cart</RouterLink> | 
+      <RouterLink to="/checkout">Checkout</RouterLink> | 
+      <RouterLink to="/order-history">Order History</RouterLink> | 
+      <RouterLink to="/search">Search</RouterLink>
     </nav>
   </header>
 
-  <!-- This will render the current route view -->
+  <!-- This renders the active route -->
   <main>
     <RouterView />
   </main>
