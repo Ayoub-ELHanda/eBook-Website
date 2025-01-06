@@ -1,12 +1,35 @@
-// Minimal Vue.js eBook Store Template
-// Purpose: Sell PDF books with secure access after purchase
+import { createApp } from 'vue'
+import App from './App.vue'
+import axios from 'axios'
+import router from './router'
+import { createPinia } from 'pinia' 
+import { useForm, Field, ErrorMessage, configure } from 'vee-validate'  // Correct imports for VeeValidate v4
 
-// main.js (Vue Entry Point)
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import './assets/style.css';
+// Create Vue application instance
+const app = createApp(App)
 
-const app = createApp(App);
-app.use(router);
-app.mount('#app');
+// ✅ Replace Vuex with Pinia for Vue 3
+const pinia = createPinia()
+
+// ✅ Configure Axios for global usage
+app.config.globalProperties.$http = axios
+axios.defaults.headers.common['Content-Type'] = 'application/json'
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+
+// ✅ VeeValidate Configuration (Optional Custom Messages)
+configure({
+  validateOnInput: true,
+  validateOnBlur: true
+})
+
+// ✅ Register Plugins
+app.use(router)
+app.use(pinia)
+
+// ✅ Globally register VeeValidate components (v4+)
+app.component('VForm', useForm)
+app.component('VField', Field)
+app.component('ErrorMessage', ErrorMessage)
+
+// ✅ Mount the App
+app.mount('#app')

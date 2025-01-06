@@ -1,31 +1,57 @@
 <template>
-    <h1>Login</h1>
-    <form @submit.prevent="loginUser">
-        <input v-model="email" placeholder="Email" required />
-        <input v-model="password" type="password" placeholder="Password" required />
-        <button type="submit">Login</button>
-    </form>
+  <div class="login-page">
+		  <div class="form" style="display:none">
+			<form class="login-form">
+			  <input type="text" placeholder="username"/><br>
+			  <input type="password" placeholder="password"/><br><br>
+			  <button>login</button>
+			</form>
+		  </div>
+  </div>
 </template>
+<style>
+		
+			.form {
+			  position: relative;
+			  z-index: 1;
+			  background: #FFFFFF;
+			  max-width: 360px;
+			  margin: 0 auto 100px;
+			  padding: 45px;
+			  text-align: center;
+			  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			}
+			.form input {
+			  font-family: "Roboto", sans-serif;
+			  outline: 0;
+			  background: #f2f2f2;
+			  width: 100%;
+			  border: 0;
+			  margin: 0 0 15px;
+			  padding: 15px;
+			  box-sizing: border-box;
+			  font-size: 14px;
+			}
+			.form button {
+			  font-family: "Roboto", sans-serif;
+			  text-transform: uppercase;
+			  outline: 0;
+			  background: #a76718;
+			  width: 100%;
+			  border: 0;
+			  padding: 15px;
+			  color: #FFFFFF;
+			  font-size: 14px;
+			  -webkit-transition: all 0.3 ease;
+			  transition: all 0.3 ease;
+			  cursor: pointer;
+			}
+			.form button:hover,.form button:active,.form button:focus {
+			  background: #d6994d;
+			}
 
-<script>
-import axios from 'axios';
-export default {
-    data() {
-        return {
-            email: '',
-            password: ''
-        };
-    },
-    methods: {
-        async loginUser() {
-            const response = await axios.post('http://localhost:5000/api/users/login', {
-                email: this.email,
-                password: this.password
-            });
-            localStorage.setItem('token', response.data.token);
-            alert('Login successful!');
-            this.$router.push('/library');
-        }
-    }
-}
-</script>
+			body {
+			  background: #F7F8FB; /* fallback for old browsers */
+    
+			}
+</style>

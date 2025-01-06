@@ -1,6 +1,16 @@
 <template>
-    <h1>Welcome to the eBook Store</h1>
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/register">Register</router-link> |
-    <router-link to="/search">Search Books</router-link>
+  <div>
+    <!-- Updated to use component names directly without manual registration -->
+    <AppHeader />
+    <ProductList />
+  </div>
 </template>
+
+<script setup>
+import AppHeader from './Header.vue'
+import ProductList from '../components/product/ProductList.vue'
+</script>
+
+<style scoped>
+/* Add scoped styles here if needed */
+</style>

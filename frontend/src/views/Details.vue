@@ -1,25 +1,28 @@
 <template>
-    <h1>Book Details</h1>
-    <p>{{ book.title }}</p>
-    <p>{{ book.description }}</p>
-    <p>Price: ${{ book.price }}</p>
-    <button @click="addToCart">Add to Cart</button>
+  <div>
+    <app-header></app-header>
+    <product-details :product="product" :isAdding="true" ></product-details>
+  </div>
+
 </template>
 
 <script>
-import axios from 'axios';
-export default {
-    data() {
-        return { book: {} };
+  import ProductDetails from '../components/product/ProductDetails.vue'
+  import AppHeader from './Header.vue'
+  export default {
+    created () {
+      if (!this.product.name) {
+        this.$store.dispatch('productById', this.$route.params['id'])
+      }
     },
-    mounted() {
-        axios.get(`http://localhost:5000/api/books/${this.$route.params.id}`)
-            .then(response => { this.book = response.data; });
+    computed: {
+      product () {
+        return this.$store.getters.productById(this.$route.params['id'])
+      }
     },
-    methods: {
-        addToCart() {
-            alert(`${this.book.title} added to cart!`);
-        }
+    components: {
+      'product-details': ProductDetails,
+      'app-header': AppHeader
     }
-}
+  }
 </script>

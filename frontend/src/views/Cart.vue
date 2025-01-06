@@ -1,21 +1,40 @@
 <template>
-    <h1>Shopping Cart</h1>
-    <div v-for="item in cart" :key="item.id">
-        <p>{{ item.title }} - ${{ item.price }}</p>
-        <button @click="removeFromCart(item.id)">Remove</button>
+  <div v-if="cart.length > 0">
+    <app-header></app-header>
+    <div class="title">
+      <h1><i class="fa fa-superpowers"></i> Your Cart</h1>
     </div>
-    <router-link to="/checkout">Proceed to Checkout</router-link>
+    <!-- FIXED: Key moved to the template -->
+    <template v-for="(product, index) in cart" :key="index">
+      <product-details :product="product"></product-details>
+    </template>
+  </div>
+  <div v-else class="title">
+    <app-header></app-header>
+    <h1><i class="fa fa-superpowers"></i> Your Cart is Empty</h1>
+  </div>
 </template>
 
 <script>
+import ProductDetails from '../components/product/ProductDetails.vue';
+import AppHeader from './Header.vue';
+
 export default {
     data() {
-        return { cart: [] };
+        return {
+            cart: this.$store.state.cart
+        };
     },
-    methods: {
-        removeFromCart(id) {
-            this.cart = this.cart.filter(item => item.id !== id);
-        }
+    components: {
+        'product-details': ProductDetails,
+        'app-header': AppHeader
     }
-}
+};
 </script>
+
+<style scoped>
+.title {
+    text-align: center;
+    margin-top: 20px;
+}
+</style>
